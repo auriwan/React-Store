@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Header, ProductCard} from '../../component';
@@ -70,6 +70,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#2f2e41',
     marginBottom: 16,
+    marginTop: 16,
+    marginLeft: 16,
   },
   footer: {
     height: 30,
