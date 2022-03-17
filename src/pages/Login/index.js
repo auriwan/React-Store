@@ -17,7 +17,7 @@ const Login = ({navigation}) => {
   const [password, setPassword] = useState('');
 
   const login = () => {
-    navigation.replace('Home');
+    navigation.navigate('MainApp');
   };
   return (
     <SafeAreaView style={styles.page}>
