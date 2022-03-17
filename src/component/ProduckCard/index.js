@@ -1,11 +1,13 @@
 import React from 'react';
 import {Image, StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const currencyFormat = number => {
   return `Rp. ${number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
 };
 
 const ProductCard = ({title, desc, price, image}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Image source={{uri: image}} style={styles.image} />
@@ -20,7 +22,15 @@ const ProductCard = ({title, desc, price, image}) => {
           {currencyFormat(price)}
         </Text>
         <View style={styles.actionWrapper}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('EditProduct', {
+                title: title,
+                desc: desc,
+                price: price,
+                image: image,
+              });
+            }}>
             <View style={[styles.actionButton, styles.actionEdit]}>
               <Text style={styles.actionText}>Edit</Text>
             </View>
