@@ -1,10 +1,6 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-<<<<<<< HEAD
-  View,
-=======
->>>>>>> develop
   Text,
   SafeAreaView,
   TouchableOpacity,
