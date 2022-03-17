@@ -2,7 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
-import {Login, Home, Setting, AddProduct} from '../pages';
+import {Login, Home, Setting, AddProduct, EditProduct} from '../pages';
 import {BottomNavigator} from '../component';
 
 const Stack = createStackNavigator();
@@ -33,6 +33,7 @@ function Routes() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="MainApp" component={MainApp} />
         <Stack.Screen name="AddProduct" component={AddProduct} />
+        <Stack.Screen name="EditProduct" component={EditProduct} />
       </Stack.Navigator>
     </NavigationContainer>
   );
