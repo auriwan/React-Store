@@ -60,9 +60,28 @@ const Home = () => {
       })
       .catch(error => {
         setRefreshing(false);
-        Alert.alert(`Gagal Mendapatkan data ${error.toString()}`);
+        //Alert.alert(`Gagal Mendapatkan data ${error.toString()}`);
       });
   }, []);
+
+  const deleteProduct = async id => {
+    try {
+      const DeleteProduct = await axios({
+        method: 'delete',
+        url: `http://api-test.q.camp404.com/public/api/material/${id}`,
+        headers: {
+          Authorization: `Bearer ${stateGlobal.access_token}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+      if (DeleteProduct.status === 200) {
+        Alert.alert('sukkses hapus Data');
+        onRefresh();
+      }
+    } catch (error) {
+      Alert.alert('Gagal Menghapus data');
+    }
+  };
 
   const renderItem = ({item}) => (
     <ProductCard
@@ -70,6 +89,7 @@ const Home = () => {
       desc={item.deskripsi}
       price={item.harga}
       image={item.gambar}
+      deletePress={() => deleteProduct(item.id)}
     />
   );
   useEffect(() => {

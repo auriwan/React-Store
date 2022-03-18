@@ -6,7 +6,7 @@ const currencyFormat = number => {
   return `Rp. ${number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
 };
 
-const ProductCard = ({title, desc, price, image}) => {
+const ProductCard = ({title, desc, price, image, deletePress}) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -35,7 +35,7 @@ const ProductCard = ({title, desc, price, image}) => {
               <Text style={styles.actionText}>Edit</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => deletePress()}>
             <View style={[styles.actionButton, styles.actionDelete]}>
               <Text style={styles.actionText}>Delete</Text>
             </View>
