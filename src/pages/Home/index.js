@@ -1,7 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
-import {SafeAreaView, Alert} from 'react-native-safe-area-context';
+import React, {useCallback, useEffect, useState} from 'react';
+import {
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  RefreshControl,
+  Alert,
+} from 'react-native';
 import {Header, ProductCard} from '../../component';
 import {useSelector} from 'react-redux';
 import axios from 'axios';
@@ -33,6 +39,30 @@ const Home = () => {
 
   const stateGlobal = useSelector(state => state);
   const [data, setData] = useState();
+  const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    onRefresh();
+    return onRefresh();
+  }, []);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setData();
+    axios
+      .get('http://api-test-q.camp404.com/public/api/material', {
+        headers: {Authorization: `Bearer ${stateGlobal.access_token}`},
+      })
+      .then(response => {
+        let res = response.data;
+        setData(res.materials);
+        setRefreshing(false);
+      })
+      .catch(error => {
+        setRefreshing(false);
+        Alert.alert(`Gagal Mendapatkan data ${error.toString()}`);
+      });
+  }, []);
 
   const renderItem = ({item}) => (
     <ProductCard
