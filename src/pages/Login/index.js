@@ -11,13 +11,32 @@ import {
 } from 'react-native';
 import Images from '../../assets';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import axios from 'axios';
+import {useDispatch} from 'react-redux';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   const login = () => {
-    navigation.navigate('MainApp');
+    axios
+      .post('http://api-test.q.camp404.com/public/api/login', {
+        email: email,
+        password: password,
+        password_confirmation: password,
+      })
+      .then(response => {
+        let res = response.data;
+        dispatch({
+          type: 'SET_LOGIN',
+          value: {user: res.user, access_token: res.access_token},
+        });
+        navigation.replace('MainApp');
+      })
+      .catch(error => {
+        Alert.alert('Login Failed', error.response.data.message);
+      });
   };
   return (
     <SafeAreaView style={styles.page}>
