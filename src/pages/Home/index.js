@@ -85,6 +85,7 @@ const Home = () => {
 
   const renderItem = ({item}) => (
     <ProductCard
+      id={item.id}
       title={item.nama_barang}
       desc={item.deskripsi}
       price={item.harga}
