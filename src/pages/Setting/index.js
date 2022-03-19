@@ -12,6 +12,7 @@ import {Header} from '../../component';
 import Images from '../../assets';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch} from 'react-redux';
+import {removeValue} from '../../localStorage';
 
 const mapLink = 'https://goo.gl/maps/xgArh2zPM8HWFcuc9';
 
@@ -32,6 +33,7 @@ const Setting = ({navigation}) => {
     dispatch({
       type: 'SET_LOGOUT',
     });
+    removeValue('user');
     navigation.replace('Login');
   };
 
