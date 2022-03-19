@@ -14,6 +14,14 @@ const reducer = (state = initialState, action) => {
     };
   }
 
+  if (action.type === 'SET_LOGOUT') {
+    return {
+      ...state,
+      user: null,
+      access_token: null,
+    };
+  }
+
   return false;
 };
 

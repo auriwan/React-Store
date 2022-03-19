@@ -11,10 +11,13 @@ import {
 import {Header} from '../../component';
 import Images from '../../assets';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useDispatch} from 'react-redux';
+import {removeValue} from '../../localStorage';
 
 const mapLink = 'https://goo.gl/maps/xgArh2zPM8HWFcuc9';
 
 const Setting = ({navigation}) => {
+  const dispatch = useDispatch();
   const mapRedirect = useCallback(async () => {
     //check link custom Support
     const supported = await Linking.canOpenURL(mapLink);
@@ -25,6 +28,14 @@ const Setting = ({navigation}) => {
       Alert.alert(`Dont know how to open this URL: ${mapLink}`);
     }
   }, []);
+
+  const logout = () => {
+    dispatch({
+      type: 'SET_LOGOUT',
+    });
+    removeValue('user');
+    navigation.replace('Login');
+  };
 
   return (
     <SafeAreaView style={styles.page}>
@@ -43,7 +54,7 @@ const Setting = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.btnWrapper}>
-        <TouchableOpacity style={styles.btnLogout}>
+        <TouchableOpacity style={styles.btnLogout} onPress={() => logout()}>
           <Text style={styles.btnLogoutText}>Logout</Text>
         </TouchableOpacity>
       </View>
